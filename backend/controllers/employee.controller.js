@@ -1,0 +1,69 @@
+import Employee from "../models/employee.model.js";
+
+export const createEmployee = async (req, res) => {
+  try {
+    const {
+      fullName,
+      dateOfBirth,
+      email,
+      phone,
+      department,
+      designation,
+      gender
+    } = req.body;
+
+    if (!req.file) {
+      return res.status(400).json({ message: "Photo is required" });
+    }
+
+    const existing = await Employee.findOne({ email });
+    if (existing) {
+      return res.status(400).json({ message: "Employee email already exists" });
+    }
+
+    const employee = await Employee.create({
+      fullName,
+      dateOfBirth,
+      email,
+      phone,
+      department,
+      designation,
+      gender,
+      photo: req.file.filename
+    });
+
+    res.status(200).json({message: "Employee created",employee});
+
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const getEmployees = async (req, res) => {
+  try {
+    const { search, department, designation, gender } = req.query;
+
+    let query = {};
+
+    // Search logic
+    if (search) {
+      query.$or = [
+        { fullName: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+        { department: { $regex: search, $options: "i" } }
+      ];
+    }
+
+    // Filters
+    if (department) query.department = department;
+    if (designation) query.designation = designation;
+    if (gender) query.gender = gender;
+
+    const employees = await Employee.find(query).sort({ createdAt: -1 });
+
+    res.status(200).json(employees);
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

@@ -2,8 +2,8 @@ import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import api from "../../../frontend/src/services/api";
 import toast from "react-hot-toast"
+import api from "../services/api";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);

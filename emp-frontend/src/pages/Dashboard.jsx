@@ -23,14 +23,16 @@ import noRecords from '../assets/icons/no_records.svg'
 import photoIcon from '../assets/icons/photo.svg'
 import actionIcon from '../assets/icons/action.svg'
 import createIcon from '../assets/icons/create.svg'
-import api from "../../../frontend/src/services/api";
 import { CreateEmployeeModel } from "../components/CreateEmployeeModel";
+import api from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [employees, setEmployees] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
   const fetchEmployees = async () => {
     try {
@@ -55,6 +57,15 @@ const Dashboard = () => {
 
     return () => clearTimeout(delay);
   }, [searchTerm]);
+
+  const handleLogout = async () => {
+  try {
+    await api.post("/auth/logout");
+    navigate("/login");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const menuItems = [
   { name: 'Employee',        icon: employeeIcon },
@@ -95,6 +106,9 @@ const Dashboard = () => {
         <header className="header">
           
           <img src={userAvatar} alt="User" className="profile-icon" />
+           <button className="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </header>
 
         <div className="content-area">
@@ -118,7 +132,7 @@ const Dashboard = () => {
            {/* Table */}
           <div className="table-container">
             {employees.length === 0 ? (
-              <div>
+              <div className="empty-state">
                 <img src={noRecords} alt="No Records" width="120" className="no-records"/>
                 <div>No Records to be displayed</div>
                 </div>

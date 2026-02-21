@@ -45,19 +45,33 @@
   border-left: 4px solid #2f5fb3;
 }
 
+.menu li:hover {
+  background-color: #f0f4ff;
+  transform: translateX(3px);
+}
+
 /* MAIN */
 .main-content {
   flex: 1;
   padding: 20px 40px;
+  display: flex;
+  flex-direction: column  ;
 }
 
 /* HEADER */
 .header {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
+  height: 60px;
   border-bottom: 1px solid #d0d7e2;
   padding-bottom: 10px;
+}
+
+.content-area {
+  flex: 1;          /* This pushes footer down */
+  display: flex;
+  flex-direction: column;
 }
 
 .page-title {
@@ -74,7 +88,9 @@
 
 .profile-icon {
   width: 32px;
-
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 /* TOOLBAR */
@@ -115,6 +131,8 @@
 /* TABLE */
 .table-container {
   border: 1px solid #d0d7e2;
+    border-radius: 6px;
+  overflow: hidden;
 }
 
 table {
@@ -152,7 +170,6 @@ th {
   margin-top: 20px;
   border-top: 1px solid #d0d7e2;
   padding-top: 10px;
-  bottom: 0;
 }
 
 .records-box,
@@ -189,11 +206,28 @@ th {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 250px;
   gap: 12px;
   color: #6b7280;
+  font-size: 14px;
 }
 
 .no-records {
   width: 120px;
   opacity: 0.8;
+}
+
+.logout-btn {
+  margin-left: 15px;
+  border: 1px solid #2f5fb3;
+  background: white;
+  color: #2f5fb3;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.logout-btn:hover {
+  background: #2f5fb3;
+  color: white;
 }

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import './CreateEmployeeModel.css'
-import api from '../../../frontend/src/services/api'
+import api from '../services/api'
 
 const DEPARTMENTS = ["HR", "Engineering", "Marketing", "Sales","Product Development"]
 const DESIGNATIONS = ["Manager", "Software Developer", "Intern", "Executive"]

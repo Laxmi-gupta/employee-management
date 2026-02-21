@@ -17,7 +17,6 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data)
       await api.post("/auth/login", data);
       navigate("/dashboard");
       toast.success("Login successful");

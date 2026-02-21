@@ -2,7 +2,6 @@ import Employee from "../models/employee.model.js";
 
 export const createEmployee = async (req, res) => {
   try {
-    console.log("created emp");
     const {
       fullName,
       dateOfBirth,
@@ -12,7 +11,6 @@ export const createEmployee = async (req, res) => {
       designation,
       gender
     } = req.body;
-    console.log(req.body);
     if (!req.file || !req.file.path) {
       return res.status(400).json({ message: "Photo is required" });
     }
@@ -21,7 +19,6 @@ export const createEmployee = async (req, res) => {
     if (existing) {
       return res.status(400).json({ message: "Employee email already exists" });
     }
-    console.log(existing,req.file)
     const employee = await Employee.create({
       fullName,
       dateOfBirth,
@@ -32,7 +29,6 @@ export const createEmployee = async (req, res) => {
       gender,
       photo: req.file.path
     });
-    console.log("emp",employee)
     res.status(200).json({message: "Employee created",employee});
 
   } catch (error) {
@@ -59,9 +55,7 @@ export const getEmployees = async (req, res) => {
     if (department) query.department = department;
     if (designation) query.designation = designation;
     if (gender) query.gender = gender;
-    console.log("eury",query)
     const employees = await Employee.find(query).sort({ createdAt: -1 });
-    console.log("emp",employees)
     res.status(200).json(employees);
 
   } catch (error) {

@@ -19,7 +19,6 @@ export const  CreateEmployeeModel = ({ onClose, onSuccess }) => {
           formData.append(key, data[key])
         }
       });
-      console.log('Formdata', formData)
       await api.post("/employees", formData)
       toast.success('Employee created successfully')
       onSuccess()

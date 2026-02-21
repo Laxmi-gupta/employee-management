@@ -39,7 +39,6 @@ const Dashboard = () => {
       const res = await api.get("/employees",{
         params: { search: searchTerm }
       });
-      console.log(res); 
       setEmployees(res.data);
     } catch (err) {
       console.error(err);

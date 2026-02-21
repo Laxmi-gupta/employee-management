@@ -4,8 +4,8 @@ dotenv.config();
 import express from "express";
 import { connectDB } from "./config/db.js";
 import createAdmin from "./utils/createAdmin.js";
-import {userRoute} from "./routes/auth.routes.js"
-import { authMiddleware } from "./middleware/route.middleware.js";
+import userRoute from "./routes/auth.routes.js"
+import employeeRoute from "./routes/employee.routes.js"
 import cookieParser from "cookie-parser";
 import cors from "cors";
 

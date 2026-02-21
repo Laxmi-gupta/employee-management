@@ -13,7 +13,7 @@ export const createEmployee = async (req, res) => {
       gender
     } = req.body;
     console.log(req.body);
-    if (!req.file) {
+    if (!req.file || !req.file.path) {
       return res.status(400).json({ message: "Photo is required" });
     }
 
@@ -21,7 +21,7 @@ export const createEmployee = async (req, res) => {
     if (existing) {
       return res.status(400).json({ message: "Employee email already exists" });
     }
-
+    console.log(existing,req.file)
     const employee = await Employee.create({
       fullName,
       dateOfBirth,
@@ -30,9 +30,9 @@ export const createEmployee = async (req, res) => {
       department,
       designation,
       gender,
-      photo: req.file.filename
+      photo: req.file.path
     });
-
+    console.log("emp",employee)
     res.status(200).json({message: "Employee created",employee});
 
   } catch (error) {

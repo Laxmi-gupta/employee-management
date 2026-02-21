@@ -3,8 +3,8 @@ import toast from 'react-hot-toast'
 import './CreateEmployeeModel.css'
 import api from '../../../frontend/src/services/api'
 
-const DEPARTMENTS = ['HR', 'Engineering', 'Product Development', 'Sales', 'Marketing', 'Finance', 'Operations']
-const DESIGNATIONS = ['Software Developer', 'Senior Developer', 'Team Lead', 'Manager', 'HR Executive', 'Sales Executive', 'Analyst']
+const DEPARTMENTS = ["HR", "Engineering", "Marketing", "Sales","Product Development"]
+const DESIGNATIONS = ["Manager", "Software Developer", "Intern", "Executive"]
 
 export const  CreateEmployeeModel = ({ onClose, onSuccess }) => {
   const { register, handleSubmit, formState: { errors } } = useForm()

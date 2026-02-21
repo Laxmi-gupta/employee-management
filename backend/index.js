@@ -23,7 +23,6 @@ const startServer = async () => {
     await connectDB();
     console.log("DB Connected");
     
-    app.use("/uploads", express.static("uploads"));
 
     app.use('/api/auth',userRoute);
     app.use('/api/employees',employeeRoute);

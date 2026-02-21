@@ -137,7 +137,17 @@ const Dashboard = () => {
                       <td>{emp.department}</td>
                       <td>{emp.designation}</td>
                       <td>
-                        <img src={photoIcon} alt="Photo" className="icon-small" style={{ cursor: "pointer" }} onClick={() => setPreviewImage(emp.photo)}/>
+                        {emp.photo ? (
+                          <img
+                            src={photoIcon}
+                            alt="Employee"
+                            className="icon-small"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setPreviewImage(emp.photo)}
+                          />
+                        ) : (
+                          <img src={photoIcon} alt="No Photo" className="icon-small" />
+                        )}
                       </td>
                       <td>
                         <img src={actionIcon} alt="Action" className="icon-small" />

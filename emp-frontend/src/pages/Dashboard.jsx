@@ -30,10 +30,13 @@ const Dashboard = () => {
   const [employees, setEmployees] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const fetchEmployees = async () => {
     try {
-      const res = await api.get("/employees");
+      const res = await api.get("/employees",{
+        params: { search: searchTerm }
+      });
       console.log(res); 
       setEmployees(res.data);
     } catch (err) {
@@ -44,6 +47,14 @@ const Dashboard = () => {
   useEffect(() => {
     fetchEmployees();
 }, []);
+
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      fetchEmployees();
+    }, 400); // debounce
+
+    return () => clearTimeout(delay);
+  }, [searchTerm]);
 
   const menuItems = [
   { name: 'Employee',        icon: employeeIcon },
@@ -95,7 +106,9 @@ const Dashboard = () => {
             <div className="toolbar">
               <div className="search-box">
                 <img src={searchIcon} alt="Search" />
-                <input type="text" placeholder="Search..." />
+                <input type="text" placeholder="Search..." 
+                    value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
+                />
               </div>
             
               <img src={createIcon} alt="Create" className="create-icon"  onClick={() => setOpenModal(true)}/>

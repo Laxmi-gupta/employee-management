@@ -20,6 +20,12 @@ The project follows clean architecture principles with separate frontend and bac
 
 ---
 
+## Test Credentials
+```
+  Email: admin@gmail.com
+  Password: admin123
+```
+
 ## Tech Stack
 
 ### Frontend
